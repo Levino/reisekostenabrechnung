@@ -3,12 +3,12 @@ import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router';
 
 // Config
-import { SIGN_IN_PATH, TASKS_PATH } from 'src/config';
+import { SIGN_IN_PATH, TRIPS_PATH } from 'src/config';
 
 // Components
 import App from './app/app';
 import SignIn from './sign-in/sign-in';
-import Tasks from './tasks/tasks';
+import Trips from './trips/trips';
 
 
 export function Root({history, onEnter, store}) {
@@ -17,7 +17,7 @@ export function Root({history, onEnter, store}) {
       <Router history={history}>
         <Route component={App} onEnter={onEnter} path="/">
           <Route component={SignIn} path={SIGN_IN_PATH} />
-          <Route component={Tasks} path={TASKS_PATH} />
+          <Route component={Trips} path={TRIPS_PATH} />
         </Route>
       </Router>
     </Provider>

@@ -2,7 +2,7 @@
 //  TASK-FORM
 //===================================================================
 
-.task-form {
+.trip-form {
   margin: 40px 0 10px;
 
   @include media-query(540) {
@@ -11,7 +11,7 @@
 }
 
 
-.task-form__input {
+.trip-form__input {
   outline: none;
   border: 0;
   border-bottom: 1px dotted #666;

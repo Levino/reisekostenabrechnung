@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import React, { Component, PropTypes } from 'react';
 
 
-export class TaskItem extends Component {
+export class TripItem extends Component {
   static propTypes = {
-    deleteTask: PropTypes.func.isRequired,
-    task: PropTypes.object.isRequired,
-    updateTask: PropTypes.func.isRequired
+    deleteTrip: PropTypes.func.isRequired,
+    trip: PropTypes.object.isRequired,
+    updateTrip: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
@@ -23,7 +23,7 @@ export class TaskItem extends Component {
   }
 
   delete() {
-    this.props.deleteTask(this.props.task);
+    this.props.deleteTrip(this.props.trip);
   }
 
   editTitle() {
@@ -32,11 +32,11 @@ export class TaskItem extends Component {
 
   saveTitle(event) {
     if (this.state.editing) {
-      const { task } = this.props;
+      const { trip } = this.props;
       const title = event.target.value.trim();
 
-      if (title.length && title !== task.title) {
-        this.props.updateTask(task, {title});
+      if (title.length && title !== trip.title) {
+        this.props.updateTrip(trip, {title});
       }
 
       this.stopEditing();
@@ -48,8 +48,8 @@ export class TaskItem extends Component {
   }
 
   toggleStatus() {
-    let checked = !this.props.task.completed;
-    this.props.updateTask(this.props.task, {completed: checked});
+    let checked = !this.props.trip.completed;
+    this.props.updateTrip(this.props.trip, {completed: checked});
   }
 
   onKeyUp(event) {
@@ -61,23 +61,23 @@ export class TaskItem extends Component {
     }
   }
 
-  renderTitle(task) {
+  renderTitle(trip) {
     return (
       <div
-        className="task-item__title"
+        className="trip-item__title"
         ref={c => this.titleText = c}
-        tabIndex="0">{task.title}
+        tabIndex="0">{trip.title}
       </div>
     );
   }
 
-  renderTitleInput(task) {
+  renderTitleInput(trip) {
     return (
       <input
         autoComplete="off"
         autoFocus
-        className="task-item__input"
-        defaultValue={task.title}
+        className="trip-item__input"
+        defaultValue={trip.title}
         maxLength="64"
         onBlur={this.saveTitle}
         onKeyUp={this.onKeyUp}
@@ -89,33 +89,33 @@ export class TaskItem extends Component {
 
   render() {
     const { editing } = this.state;
-    const { task } = this.props;
+    const { trip } = this.props;
 
     return (
-      <div className={classNames('task-item', {'task-item--completed': task.completed, 'task-item--editing': editing})} tabIndex="0">
+      <div className={classNames('trip-item', {'trip-item--completed': trip.completed, 'trip-item--editing': editing})} tabIndex="0">
         <div className="cell">
           <button
             aria-hidden={editing}
-            aria-label="Mark task as completed"
-            className={classNames('task-item__button', {'hide': editing})}
+            aria-label="Mark trip as completed"
+            className={classNames('trip-item__button', {'hide': editing})}
             onClick={this.toggleStatus}
             ref={c => this.toggleStatusButton = c}
             type="button">
-            <svg className={classNames('icon', {'icon--active': task.completed})} width="24" height="24" viewBox="0 0 24 24">
+            <svg className={classNames('icon', {'icon--active': trip.completed})} width="24" height="24" viewBox="0 0 24 24">
               <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path>
             </svg>
           </button>
         </div>
 
         <div className="cell">
-          {editing ? this.renderTitleInput(task) : this.renderTitle(task)}
+          {editing ? this.renderTitleInput(trip) : this.renderTitle(trip)}
         </div>
 
         <div className="cell">
           <button
             aria-hidden={!editing}
             aria-label="Cancel editing"
-            className={classNames('task-item__button', {'hide': !editing})}
+            className={classNames('trip-item__button', {'hide': !editing})}
             onClick={this.stopEditing}
             ref={c => this.cancelEditButton = c}
             type="button">
@@ -126,8 +126,8 @@ export class TaskItem extends Component {
           </button>
           <button
             aria-hidden={editing}
-            aria-label="Edit task"
-            className={classNames('task-item__button', {'hide': editing})}
+            aria-label="Edit trip"
+            className={classNames('trip-item__button', {'hide': editing})}
             onClick={this.editTitle}
             ref={c => this.editButton = c}
             type="button">
@@ -137,8 +137,8 @@ export class TaskItem extends Component {
           </button>
           <button
             aria-hidden={editing}
-            aria-label="Delete task"
-            className={classNames('task-item__button', {'hide': editing})}
+            aria-label="Delete trip"
+            className={classNames('trip-item__button', {'hide': editing})}
             onClick={this.delete}
             ref={c => this.deleteButton = c}
             type="button">

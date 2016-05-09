@@ -2,24 +2,24 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { notificationActions } from 'src/core/notification';
-import { tasksActions } from 'src/core/tasks';
+import { tripsActions } from 'src/core/trips';
 import { Notification } from './notification';
-import { TaskFilters } from './task-filters';
-import { TaskForm } from './task-form';
-import { TaskList } from './task-list';
+import { TripFilters } from './trip-filters';
+import { TripForm } from './trip-form';
+import { TripList } from './trip-list';
 
 
-export class Tasks extends Component {
+export class Trips extends Component {
   static propTypes = {
-    createTask: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired,
+    createTrip: PropTypes.func.isRequired,
+    deleteTrip: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
     registerListeners: PropTypes.func.isRequired,
-    tasks: PropTypes.array.isRequired,
-    undeleteTask: PropTypes.func.isRequired,
-    updateTask: PropTypes.func.isRequired
+    trips: PropTypes.array.isRequired,
+    undeleteTrip: PropTypes.func.isRequired,
+    updateTrip: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -30,12 +30,12 @@ export class Tasks extends Component {
     const {
       dismissNotification,
       notification,
-      undeleteTask
+      undeleteTrip
     } = this.props;
 
     return (
       <Notification
-        action={undeleteTask}
+        action={undeleteTrip}
         dismiss={dismissNotification}
         {...notification}
       />
@@ -44,12 +44,12 @@ export class Tasks extends Component {
 
   render() {
     const {
-      createTask,
-      deleteTask,
+      createTrip,
+      deleteTrip,
       location,
       notification,
-      tasks,
-      updateTask
+      trips,
+      updateTrip
     } = this.props;
 
     const { filter } = location.query;
@@ -57,16 +57,16 @@ export class Tasks extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-          <TaskForm createTask={createTask} />
+          <TripForm createTrip={createTrip} />
         </div>
 
         <div className="g-col">
-          <TaskFilters filter={filter} />
-          <TaskList
-            deleteTask={deleteTask}
+          <TripFilters filter={filter} />
+          <TripList
+            deleteTrip={deleteTrip}
             filter={filter}
-            tasks={tasks}
-            updateTask={updateTask}
+            trips={trips}
+            updateTrip={updateTrip}
           />
         </div>
 
@@ -78,5 +78,5 @@ export class Tasks extends Component {
 
 export default connect(state => ({
   notification: state.notification,
-  tasks: state.tasks.list
-}), Object.assign({}, tasksActions, notificationActions))(Tasks);
+  trips: state.trips.list
+}), Object.assign({}, tripsActions, notificationActions))(Trips);

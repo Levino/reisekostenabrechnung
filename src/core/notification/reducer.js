@@ -1,4 +1,4 @@
-import { DELETE_TASK_SUCCESS } from 'src/core/tasks';
+import { DELETE_TRIP_SUCCESS } from 'src/core/trips';
 import { DISMISS_NOTIFICATION } from './action-types';
 
 
@@ -11,11 +11,11 @@ export const initialState = {
 
 export function notificationReducer(state = initialState, action) {
   switch (action.type) {
-    case DELETE_TASK_SUCCESS:
+    case DELETE_TRIP_SUCCESS:
       return {
         actionLabel: 'Undo',
         display: true,
-        message: 'Task deleted'
+        message: 'Trip deleted'
       };
 
     case DISMISS_NOTIFICATION:

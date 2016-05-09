@@ -2,25 +2,25 @@ import thunk from 'redux-thunk';
 import { addDataToFirebase, createMockStore } from 'test/utils';
 
 import {
-  CREATE_TASK_SUCCESS,
-  DELETE_TASK_SUCCESS,
-  UPDATE_TASK_SUCCESS
+  CREATE_TRIP_SUCCESS,
+  DELETE_TRIP_SUCCESS,
+  UPDATE_TRIP_SUCCESS
 } from './action-types';
 
 import {
-  createTask,
-  deleteTask,
-  updateTask,
+  createTrip,
+  deleteTrip,
+  updateTrip,
   registerListeners
 } from './actions';
 
 
-describe('Tasks actions', () => {
-  describe('createTask', () => {
-    it('should create CREATE_TASK_SUCCESS', done => {
+describe('Trips actions', () => {
+  describe('createTrip', () => {
+    it('should create CREATE_TRIP_SUCCESS', done => {
       const expectedActions = [action => {
-        return action.type === CREATE_TASK_SUCCESS &&
-               action.payload.title === 'create task';
+        return action.type === CREATE_TRIP_SUCCESS &&
+               action.payload.title === 'create trip';
       }];
 
       const firebase = new MockFirebase();
@@ -28,62 +28,62 @@ describe('Tasks actions', () => {
       const store = createMockStore({
         auth: {id: '123'},
         firebase: firebase,
-        tasks: []
+        trips: []
       }, expectedActions, [thunk], done);
 
       store.dispatch(registerListeners());
-      store.dispatch(createTask('create task'));
+      store.dispatch(createTrip('create trip'));
 
       firebase.flush();
     });
   });
 
 
-  describe('deleteTask', () => {
-    it('should create DELETE_TASK_SUCCESS', done => {
+  describe('deleteTrip', () => {
+    it('should create DELETE_TRIP_SUCCESS', done => {
       const auth = {id: '123'};
       const firebase = new MockFirebase();
-      const task = addDataToFirebase({title: 'delete task'}, firebase, `tasks/${auth.id}`);
+      const trip = addDataToFirebase({title: 'delete trip'}, firebase, `trips/${auth.id}`);
 
       const expectedActions = [
-        {type: CREATE_TASK_SUCCESS, payload: task},
-        {type: DELETE_TASK_SUCCESS, payload: task}
+        {type: CREATE_TRIP_SUCCESS, payload: trip},
+        {type: DELETE_TRIP_SUCCESS, payload: trip}
       ];
 
       const store = createMockStore({
         auth,
         firebase,
-        tasks: []
+        trips: []
       }, expectedActions, [thunk], done);
 
       store.dispatch(registerListeners());
-      store.dispatch(deleteTask(task));
+      store.dispatch(deleteTrip(trip));
 
       firebase.flush();
     });
   });
 
 
-  describe('updateTask', () => {
-    it('should create UPDATE_TASK_SUCCESS', done => {
+  describe('updateTrip', () => {
+    it('should create UPDATE_TRIP_SUCCESS', done => {
       const auth = {id: '123'};
       const changes = {title: 'updated title'};
       const firebase = new MockFirebase();
-      const task = addDataToFirebase({title: 'update task'}, firebase, `tasks/${auth.id}`);
+      const trip = addDataToFirebase({title: 'update trip'}, firebase, `trips/${auth.id}`);
 
       const expectedActions = [
-        {type: CREATE_TASK_SUCCESS, payload: task},
-        {type: UPDATE_TASK_SUCCESS, payload: Object.assign({}, task, changes)}
+        {type: CREATE_TRIP_SUCCESS, payload: trip},
+        {type: UPDATE_TRIP_SUCCESS, payload: Object.assign({}, trip, changes)}
       ];
 
       const store = createMockStore({
         auth,
         firebase,
-        tasks: []
+        trips: []
       }, expectedActions, [thunk], done);
 
       store.dispatch(registerListeners());
-      store.dispatch(updateTask(task, changes));
+      store.dispatch(updateTrip(trip, changes));
 
       firebase.flush();
     });

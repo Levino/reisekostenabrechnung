@@ -1,23 +1,23 @@
 import {
-  CREATE_TASK_ERROR,
-  CREATE_TASK_SUCCESS,
-  DELETE_TASK_ERROR,
-  DELETE_TASK_SUCCESS,
-  UPDATE_TASK_ERROR,
-  UPDATE_TASK_SUCCESS
+  CREATE_TRIP_ERROR,
+  CREATE_TRIP_SUCCESS,
+  DELETE_TRIP_ERROR,
+  DELETE_TRIP_SUCCESS,
+  UPDATE_TRIP_ERROR,
+  UPDATE_TRIP_SUCCESS
 } from './action-types';
 
 
-export function createTask(title) {
+export function createTrip(title) {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
 
-    firebase.child(`tasks/${auth.id}`)
+    firebase.child(`trips/${auth.id}`)
       .push({completed: false, title}, error => {
         if (error) {
-          console.error('ERROR @ createTask :', error); // eslint-disable-line no-console
+          console.error('ERROR @ createTrip :', error); // eslint-disable-line no-console
           dispatch({
-            type: CREATE_TASK_ERROR,
+            type: CREATE_TRIP_ERROR,
             payload: error
           });
         }
@@ -26,16 +26,16 @@ export function createTask(title) {
 }
 
 
-export function deleteTask(task) {
+export function deleteTrip(trip) {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
 
-    firebase.child(`tasks/${auth.id}/${task.key}`)
+    firebase.child(`trips/${auth.id}/${trip.key}`)
       .remove(error => {
         if (error) {
-          console.error('ERROR @ deleteTask :', error); // eslint-disable-line no-console
+          console.error('ERROR @ deleteTrip :', error); // eslint-disable-line no-console
           dispatch({
-            type: DELETE_TASK_ERROR,
+            type: DELETE_TRIP_ERROR,
             payload: error
           });
         }
@@ -44,31 +44,31 @@ export function deleteTask(task) {
 }
 
 
-export function undeleteTask() {
+export function undeleteTrip() {
   return (dispatch, getState) => {
-    const { auth, firebase, tasks } = getState();
-    const task = tasks.deleted;
+    const { auth, firebase, trips } = getState();
+    const trip = trips.deleted;
 
-    firebase.child(`tasks/${auth.id}/${task.key}`)
-      .set({completed: task.completed, title: task.title}, error => {
+    firebase.child(`trips/${auth.id}/${trip.key}`)
+      .set({completed: trip.completed, title: trip.title}, error => {
         if (error) {
-          console.error('ERROR @ undeleteTask :', error); // eslint-disable-line no-console
+          console.error('ERROR @ undeleteTrip :', error); // eslint-disable-line no-console
         }
       });
   };
 }
 
 
-export function updateTask(task, changes) {
+export function updateTrip(trip, changes) {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
 
-    firebase.child(`tasks/${auth.id}/${task.key}`)
+    firebase.child(`trips/${auth.id}/${trip.key}`)
       .update(changes, error => {
         if (error) {
-          console.error('ERROR @ updateTask :', error); // eslint-disable-line no-console
+          console.error('ERROR @ updateTrip :', error); // eslint-disable-line no-console
           dispatch({
-            type: UPDATE_TASK_ERROR,
+            type: UPDATE_TRIP_ERROR,
             payload: error
           });
         }
@@ -80,20 +80,20 @@ export function updateTask(task, changes) {
 export function registerListeners() {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
-    const ref = firebase.child(`tasks/${auth.id}`);
+    const ref = firebase.child(`trips/${auth.id}`);
 
     ref.on('child_added', snapshot => dispatch({
-      type: CREATE_TASK_SUCCESS,
+      type: CREATE_TRIP_SUCCESS,
       payload: recordFromSnapshot(snapshot)
     }));
 
     ref.on('child_changed', snapshot => dispatch({
-      type: UPDATE_TASK_SUCCESS,
+      type: UPDATE_TRIP_SUCCESS,
       payload: recordFromSnapshot(snapshot)
     }));
 
     ref.on('child_removed', snapshot => dispatch({
-      type: DELETE_TASK_SUCCESS,
+      type: DELETE_TRIP_SUCCESS,
       payload: recordFromSnapshot(snapshot)
     }));
   };

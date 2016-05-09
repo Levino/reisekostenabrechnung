@@ -1,5 +1,5 @@
 /* eslint-disable no-undefined */
-import { DELETE_TASK_SUCCESS } from 'src/core/tasks';
+import { DELETE_TRIP_SUCCESS } from 'src/core/trips';
 
 import {
   DISMISS_NOTIFICATION
@@ -19,17 +19,17 @@ describe('Notification reducer', () => {
   });
 
 
-  describe('DELETE_TASK_SUCCESS', () => {
+  describe('DELETE_TRIP_SUCCESS', () => {
     it('should return correct state', () => {
       let nextState = notificationReducer(getInitialState(), {
-        type: DELETE_TASK_SUCCESS,
-        task: {}
+        type: DELETE_TRIP_SUCCESS,
+        trip: {}
       });
 
       expect(nextState).toEqual({
         actionLabel: 'Undo',
         display: true,
-        message: 'Task deleted'
+        message: 'Trip deleted'
       });
     });
   });

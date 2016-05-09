@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { authReducer } from './auth';
 import { firebaseReducer } from './firebase';
 import { notificationReducer } from './notification';
-import { tasksReducer } from './tasks';
+import { tripsReducer } from './trips';
 
 
 export default combineReducers({
@@ -11,5 +11,5 @@ export default combineReducers({
   firebase: firebaseReducer,
   notification: notificationReducer,
   routing: routerReducer,
-  tasks: tasksReducer
+  trips: tripsReducer
 });

@@ -2,7 +2,7 @@
 //  TASK-ITEM
 //===================================================================
 
-.task-item {
+.trip-item {
   display: flex;
   outline: none;
   border-bottom: 1px dotted #666;
@@ -17,7 +17,7 @@
   }
 }
 
-.task-item--editing {
+.trip-item--editing {
   border-bottom: 1px dotted #ccc;
 }
 
@@ -48,7 +48,7 @@
 //=====================================
 //  ICON BUTTONS
 //-------------------------------------
-.task-item__button {
+.trip-item__button {
   @include button-base;
   margin-left: 5px;
   outline: none;
@@ -69,13 +69,13 @@
   fill: #555;
   transform: translate(0, 0);
 
-  .task-item__button:hover & {
+  .trip-item__button:hover & {
     fill: #999;
   }
 }
 
 .icon--active {
-  &, .task-item__button:hover & {
+  &, .trip-item__button:hover & {
     fill: #85bf6b;
   }
 }
@@ -94,7 +94,7 @@
   to { width: 100%; }
 }
 
-.task-item__title {
+.trip-item__title {
   display: inline-block;
   position: relative;
   max-width: 100%;
@@ -114,19 +114,19 @@
     content: '';
   }
 
-  .task-item--completed & {
+  .trip-item--completed & {
     color: #666;
   }
 
-  .task-item--completed &:after {
+  .trip-item--completed &:after {
     width: 100%;
   }
 
-  .task-item--completed.task-item--status-updated & {
+  .trip-item--completed.trip-item--status-updated & {
     animation: fade-title 120ms ease-in-out;
   }
 
-  .task-item--completed.task-item--status-updated &:after {
+  .trip-item--completed.trip-item--status-updated &:after {
     animation: strike-title 180ms ease-in-out;
   }
 }
@@ -135,7 +135,7 @@
 //=====================================
 //  TITLE : INPUT
 //-------------------------------------
-.task-item__input {
+.trip-item__input {
   outline: none;
   border: 0;
   padding: 0;

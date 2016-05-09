@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
 
-export class TaskForm extends Component {
+export class TripForm extends Component {
   static propTypes = {
-    createTask: PropTypes.func.isRequired
+    createTrip: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
@@ -33,17 +33,17 @@ export class TaskForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     const title = this.state.title.trim();
-    if (title.length) this.props.createTask(title);
+    if (title.length) this.props.createTrip(title);
     this.clearInput();
   }
 
   render() {
     return (
-      <form className="task-form" onSubmit={this.onSubmit} noValidate>
+      <form className="trip-form" onSubmit={this.onSubmit} noValidate>
         <input
           autoComplete="off"
           autoFocus
-          className="task-form__input"
+          className="trip-form__input"
           maxLength="64"
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
