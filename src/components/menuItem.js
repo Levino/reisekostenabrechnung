@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const Trip = ({ onClick, completed, title }) => (
+const Trip = ({ onClick, title }) => (
   <li
     onClick={onClick}>
     {title}
