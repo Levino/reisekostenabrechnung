@@ -1,10 +1,14 @@
-import React from 'react';
-import {render} from 'react-dom';
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import tripsApp from './reducers'
+import App from './components/app'
 
-class App extends React.Component {
-  render () {
-    return <p> Hello World!</p>;
-  }
-}
+let store = createStore(tripsApp)
 
-render(<App/>, document.getElementById('app'));
+render(
+  <Provider store={store}>
+      <App/>
+  </Provider>,
+  document.getElementById('app'))
